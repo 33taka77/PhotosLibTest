@@ -14,6 +14,12 @@
 		F916FC181ABD348F005B62D7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F916FC171ABD348F005B62D7 /* Images.xcassets */; };
 		F916FC1B1ABD348F005B62D7 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = F916FC191ABD348F005B62D7 /* LaunchScreen.xib */; };
 		F916FC271ABD348F005B62D7 /* PhotosLibTestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F916FC261ABD348F005B62D7 /* PhotosLibTestTests.swift */; };
+		F916FC311ABD3AAA005B62D7 /* MainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F916FC301ABD3AAA005B62D7 /* MainTableViewController.swift */; };
+		F93338221ABD875100B936ED /* ThumbnailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93338211ABD875100B936ED /* ThumbnailCollectionViewCell.swift */; };
+		F9AF9D181ABE8125000988B1 /* FullViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9AF9D171ABE8124000988B1 /* FullViewController.swift */; };
+		F9AF9D1A1ABEA5C7000988B1 /* SwiftData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9AF9D191ABEA5C7000988B1 /* SwiftData.swift */; };
+		F9AF9D1D1ABEA701000988B1 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F9AF9D1C1ABEA701000988B1 /* libsqlite3.dylib */; };
+		F9AF9D1F1ABEB06A000988B1 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9AF9D1E1ABEB06A000988B1 /* DataManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +44,13 @@
 		F916FC201ABD348F005B62D7 /* PhotosLibTestTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PhotosLibTestTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F916FC251ABD348F005B62D7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F916FC261ABD348F005B62D7 /* PhotosLibTestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosLibTestTests.swift; sourceTree = "<group>"; };
+		F916FC301ABD3AAA005B62D7 /* MainTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTableViewController.swift; sourceTree = "<group>"; };
+		F93338211ABD875100B936ED /* ThumbnailCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThumbnailCollectionViewCell.swift; sourceTree = "<group>"; };
+		F9AF9D171ABE8124000988B1 /* FullViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullViewController.swift; sourceTree = "<group>"; };
+		F9AF9D191ABEA5C7000988B1 /* SwiftData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftData.swift; sourceTree = "<group>"; };
+		F9AF9D1B1ABEA687000988B1 /* PhotosLibTest-BridgeHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PhotosLibTest-BridgeHeader.h"; sourceTree = "<group>"; };
+		F9AF9D1C1ABEA701000988B1 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		F9AF9D1E1ABEB06A000988B1 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,6 +58,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F9AF9D1D1ABEA701000988B1 /* libsqlite3.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -61,6 +75,7 @@
 		F916FBFF1ABD348E005B62D7 = {
 			isa = PBXGroup;
 			children = (
+				F9AF9D1C1ABEA701000988B1 /* libsqlite3.dylib */,
 				F916FC0A1ABD348E005B62D7 /* PhotosLibTest */,
 				F916FC231ABD348F005B62D7 /* PhotosLibTestTests */,
 				F916FC091ABD348E005B62D7 /* Products */,
@@ -79,9 +94,15 @@
 		F916FC0A1ABD348E005B62D7 /* PhotosLibTest */ = {
 			isa = PBXGroup;
 			children = (
+				F9AF9D191ABEA5C7000988B1 /* SwiftData.swift */,
+				F9AF9D1B1ABEA687000988B1 /* PhotosLibTest-BridgeHeader.h */,
 				F916FC0D1ABD348E005B62D7 /* AppDelegate.swift */,
+				F9AF9D1E1ABEB06A000988B1 /* DataManager.swift */,
 				F916FC121ABD348E005B62D7 /* ViewController.swift */,
+				F916FC301ABD3AAA005B62D7 /* MainTableViewController.swift */,
 				F916FC141ABD348F005B62D7 /* Main.storyboard */,
+				F9AF9D171ABE8124000988B1 /* FullViewController.swift */,
+				F93338211ABD875100B936ED /* ThumbnailCollectionViewCell.swift */,
 				F916FC171ABD348F005B62D7 /* Images.xcassets */,
 				F916FC191ABD348F005B62D7 /* LaunchScreen.xib */,
 				F916FC0F1ABD348E005B62D7 /* PhotosLibTest.xcdatamodeld */,
@@ -215,8 +236,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F916FC311ABD3AAA005B62D7 /* MainTableViewController.swift in Sources */,
+				F9AF9D1F1ABEB06A000988B1 /* DataManager.swift in Sources */,
 				F916FC131ABD348E005B62D7 /* ViewController.swift in Sources */,
 				F916FC111ABD348E005B62D7 /* PhotosLibTest.xcdatamodeld in Sources */,
+				F9AF9D181ABE8125000988B1 /* FullViewController.swift in Sources */,
+				F93338221ABD875100B936ED /* ThumbnailCollectionViewCell.swift in Sources */,
+				F9AF9D1A1ABEA5C7000988B1 /* SwiftData.swift in Sources */,
 				F916FC0E1ABD348E005B62D7 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -293,7 +319,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -330,7 +356,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -345,6 +371,7 @@
 				INFOPLIST_FILE = PhotosLibTest/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "PhotosLibTest/PhotosLibTest-BridgeHeader.h";
 			};
 			name = Debug;
 		};
@@ -355,6 +382,7 @@
 				INFOPLIST_FILE = PhotosLibTest/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "PhotosLibTest/PhotosLibTest-BridgeHeader.h";
 			};
 			name = Release;
 		};
@@ -411,6 +439,7 @@
 				F916FC2C1ABD348F005B62D7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F916FC2D1ABD348F005B62D7 /* Build configuration list for PBXNativeTarget "PhotosLibTestTests" */ = {
 			isa = XCConfigurationList;
@@ -419,6 +448,7 @@
 				F916FC2F1ABD348F005B62D7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
