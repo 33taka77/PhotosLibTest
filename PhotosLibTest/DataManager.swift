@@ -40,14 +40,14 @@ class DataManager {
         var retDict:Dictionary<String,AnyObject> = [:]
         for obj in dataArray {
             let dict:Dictionary = obj as Dictionary
-            for keyOfArray in dict {
-                if keyOfArray == key {
-                    let keyName = dict[keyOfArray]
+            for (keyOf, value) in dict {
+                if keyOf == key {
+                    let keyName: String = value as String
                     let k = Array(retDict.keys)
                     var flag = false
                     for keyN in k {
                         if keyN == keyName {
-                            let newDictArray = retDict[keyN]
+                            let newDictArray:[Dictionary<String,AnyObject>] = retDict[keyN]
                             newDictArray.append(dict)
                             flag = true
                         }
