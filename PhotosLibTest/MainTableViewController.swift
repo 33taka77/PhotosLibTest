@@ -31,15 +31,24 @@ class MainTableViewController: UITableViewController {
     }
 
     func makePotoLibArray() {
+        
         let moments:PHFetchResult! = PHCollectionList.fetchCollectionListsWithType(PHCollectionListType.MomentList, subtype: PHCollectionListSubtype.Any, options: nil)
         moments.enumerateObjectsUsingBlock { (obj, Index, flag) -> Void in
             let collectionList: PHCollectionList = obj as PHCollectionList
             self.collectionList.append( collectionList )
-            let collections:PHFetchResult! = PHAssetCollection.fetchMomentsInMomentList(collectionList, options: nil)
+            //let collections:PHFetchResult! = PHCollectionList.fetchTopLevelUserCollectionsWithOptions(nil)
+            //let collections:PHFetchResult! = PHAssetCollection.fetchMomentsInMomentList(collectionList, options: nil)
+            let collections:PHFetchResult! = PHAssetCollection.fetchAssetCollectionsWithType(PHAssetCollectionType.Album, subtype: PHAssetCollectionSubtype.Any, options: nil)
             collections.enumerateObjectsUsingBlock({ (collection, index_col, flag2) -> Void in
                 self.assetaCollections.append(collection as? PHAssetCollection)
             })
         }
+/*
+        let collections:PHFetchResult! = PHAssetCollection.fetchAssetCollectionsWithType(PHAssetCollectionType.Album, subtype: PHAssetCollectionSubtype.Any, options: nil)
+        collections.enumerateObjectsUsingBlock({ (collection, index_col, flag2) -> Void in
+            self.assetaCollections.append(collection as? PHAssetCollection)
+        })
+*/
     }
 
     // MARK: - Table view data source
@@ -78,13 +87,14 @@ class MainTableViewController: UITableViewController {
         cell.textLabel?.text = nameArray[indexPath.row]
         */
         
-        let collect:PHCollectionList = collectionList[indexPath.row]!
-        cell.textLabel?.text = collect.localizedTitle
+        //let collect:PHCollectionList = assetaCollections[indexPath.row]!
+        //let collect:PHCollection = assetaCollections[indexPath.row]!
+        //cell.textLabel?.text = collect.description
         
-        /*
+        
         let collect:PHCollectionList = collectionList[indexPath.row]!
         cell.textLabel?.text = collect.startDate.description
-        */
+        
         return cell
     }
     

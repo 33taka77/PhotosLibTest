@@ -24,11 +24,19 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
         // Do any additional setup after loading the view, typically from a nib.
         let leftButton:UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Reply, target: self, action: "backButtonPushed")
         self.navigationItem.leftBarButtonItem = leftButton
+        
+        let rightButton:UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Rewind, target: self, action: "sortButtonPushed")
+        self.navigationItem.rightBarButtonItem = rightButton
+        dataMngr = DataManager.sharedInstance
+
         collectAssets()
         self.remainLength = self.view.bounds.width
         
-        dataMngr = DataManager.sharedInstance
-        
+
+    }
+
+    func sortButtonPushed(){
+        var sortResult:Dictionary<String,AnyObject> = self.dataMngr.searchOfKey("PixelWidth")
     }
 
     func collectAssets() {
@@ -37,6 +45,9 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
             let assets:PHFetchResult! = PHAsset.fetchAssetsInAssetCollection(object as PHAssetCollection, options: nil)
             assets.enumerateObjectsUsingBlock({ (asset, indexOfAsset, flag) -> Void in
                 self.assetsArray.append(asset as? PHAsset)
+                var exifInfo:Dictionary = self.getExifData(asset as PHAsset)
+                exifInfo["object"] = asset
+                self.dataMngr.add(exifInfo as Dictionary<String, AnyObject>)
                 self.collectionView.reloadData()
             })
         }
@@ -61,9 +72,11 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
        
         PHImageManager.defaultManager().requestImageForAsset(phAsset, targetSize: CGSizeMake(sizeX, sizeY), contentMode: PHImageContentMode.AspectFit, options: nil, resultHandler: { (image, info) -> Void in
             cell.thumbnailImageView.image = image
+            /*
             var exifInfo:Dictionary = self.getExifData(phAsset)
             exifInfo["object"] = phAsset
             self.dataMngr.add(exifInfo)
+            */
         })
 
         
@@ -112,22 +125,32 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
         self.navigationController?.pushViewController(nextViewController, animated: true)
     }
     
+    func dispatch_async_main(block: () -> ()) {
+        dispatch_async(dispatch_get_main_queue(), block)
+    }
+    
+    func dispatch_async_global(block: () -> ()) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), block)
+    }
+   
     func getExifData( asset:PHAsset ) -> Dictionary<String,AnyObject> {
+        
         var dict:Dictionary<String,AnyObject> = [:]
-        asset.requestContentEditingInputWithOptions(nil) { (contentEditingInput: PHContentEditingInput!, _) -> Void in
-            let url = contentEditingInput.fullSizeImageURL
-            let orientation = contentEditingInput.fullSizeImageOrientation
-            var inputImage = CIImage(contentsOfURL: url)
-            inputImage = inputImage.imageByApplyingOrientation(orientation)
-            
-            for (key, value) in inputImage.properties() {
-                println("key: \(key)")
-                println("value: \(value)")
-                dict["key"] = value
+        
+        dispatch_async_global{
+            asset.requestContentEditingInputWithOptions(nil) { (contentEditingInput: PHContentEditingInput!, _) -> Void in
+                let url = contentEditingInput.fullSizeImageURL
+                let orientation = contentEditingInput.fullSizeImageOrientation
+                var inputImage = CIImage(contentsOfURL: url)
+                inputImage = inputImage.imageByApplyingOrientation(orientation)
+                for (key, value) in inputImage.properties() {
+                    println("key: \(key)")
+                    println("value: \(value)")
+                    dict["key"] = value
+                }
             }
         }
         return dict
     }
-
 }
 
