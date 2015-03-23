@@ -15,7 +15,7 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
     var remainLength:CGFloat = 0
     var prevHight:CGFloat = 0
     let spaceOfImage:CGFloat = 10
-    var dataMngr:DataManager? = nil
+    var dataMngr:DataManager! = nil
     
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -61,7 +61,7 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
        
         PHImageManager.defaultManager().requestImageForAsset(phAsset, targetSize: CGSizeMake(sizeX, sizeY), contentMode: PHImageContentMode.AspectFit, options: nil, resultHandler: { (image, info) -> Void in
             cell.thumbnailImageView.image = image
-            var exifInfo:Dictionary = getExifData(phAsset)
+            var exifInfo:Dictionary = self.getExifData(phAsset)
             exifInfo["object"] = phAsset
             self.dataMngr.add(exifInfo)
         })
@@ -112,8 +112,8 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
         self.navigationController?.pushViewController(nextViewController, animated: true)
     }
     
-    func getExifData( asset:PHAsset ) -> Dictionary {
-        var dict:Dictionary = [:]
+    func getExifData( asset:PHAsset ) -> Dictionary<String,AnyObject> {
+        var dict:Dictionary<String,AnyObject> = [:]
         asset.requestContentEditingInputWithOptions(nil) { (contentEditingInput: PHContentEditingInput!, _) -> Void in
             let url = contentEditingInput.fullSizeImageURL
             let orientation = contentEditingInput.fullSizeImageOrientation

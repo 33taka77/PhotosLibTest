@@ -16,7 +16,7 @@ import UIKit
 */
 
 class DataManager {
-    private var dataArray:[[String:AnyObject]] = []
+    var dataArray:[[String:AnyObject]] = []
     class var sharedInstance:DataManager {
         struct Static {
             static let instance:DataManager = DataManager()
@@ -41,21 +41,20 @@ class DataManager {
         for obj in dataArray {
             let dict:Dictionary = obj as Dictionary
             for (keyOf, value) in dict {
-                if keyOf == key {
-                    let keyName: String = value as String
-                    let k = Array(retDict.keys)
-                    var flag = false
-                    for keyN in k {
-                        if keyN == keyName {
-                            let newDictArray:[Dictionary<String,AnyObject>] = retDict[keyN]
+                if keyOf == key { //keyOf = "Camera"
+                    let keyName: String = value as String // keyName = "EOS M3"
+                    for (itemKey,array) in retDict {
+                        var flag = false
+                        if itemKey == keyName {
+                            var newDictArray:[Dictionary] = array as [[String:AnyObject]]
                             newDictArray.append(dict)
                             flag = true
                         }
-                    }
-                    if flag == false {
-                        retDict[keyName] = []
-                        let newDictArray = retDict[keyName]
-                        newDictArray.append(dict)
+                        if flag == false {
+                            retDict[keyName] = []
+                            var newDictArray:[Dictionary] = array as [[String:AnyObject]]
+                            newDictArray.append(dict)
+                        }
                     }
                 }
             }
