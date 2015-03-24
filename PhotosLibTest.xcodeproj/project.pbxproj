@@ -185,11 +185,11 @@
 				TargetAttributes = {
 					F916FC071ABD348E005B62D7 = {
 						CreatedOnToolsVersion = 6.2;
-						DevelopmentTeam = S9M78AE45G;
+						DevelopmentTeam = B7Y86D9M44;
 					};
 					F916FC1F1ABD348F005B62D7 = {
 						CreatedOnToolsVersion = 6.2;
-						DevelopmentTeam = S9M78AE45G;
+						DevelopmentTeam = B7Y86D9M44;
 						TestTargetID = F916FC071ABD348E005B62D7;
 					};
 				};

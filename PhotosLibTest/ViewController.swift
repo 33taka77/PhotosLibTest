@@ -125,19 +125,13 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
         self.navigationController?.pushViewController(nextViewController, animated: true)
     }
     
-    func dispatch_async_main(block: () -> ()) {
-        dispatch_async(dispatch_get_main_queue(), block)
-    }
-    
-    func dispatch_async_global(block: () -> ()) {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), block)
-    }
    
     func getExifData( asset:PHAsset ) -> Dictionary<String,AnyObject> {
-        
+        var q_global: dispatch_queue_t = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+        var q_main: dispatch_queue_t  = dispatch_get_main_queue();
+        var flag = false
         var dict:Dictionary<String,AnyObject> = [:]
-        
-        dispatch_async_global{
+        dispatch_async(q_global, {
             asset.requestContentEditingInputWithOptions(nil) { (contentEditingInput: PHContentEditingInput!, _) -> Void in
                 let url = contentEditingInput.fullSizeImageURL
                 let orientation = contentEditingInput.fullSizeImageOrientation
@@ -148,6 +142,13 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
                     println("value: \(value)")
                     dict["key"] = value
                 }
+                flag = true
+            }
+            return
+        })
+        while true {
+            if flag == true {
+                break
             }
         }
         return dict
