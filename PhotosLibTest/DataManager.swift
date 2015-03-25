@@ -43,6 +43,15 @@ class DataManager {
             for (keyOf, value) in dict {
                 if keyOf == key { //keyOf = "Camera"
                     let keyName: String = value as String // keyName = "EOS M3"
+                    if let name: AnyObject = retDict[keyName] {
+                        var array:[Dictionary<String,AnyObject>] = retDict[keyName] as [Dictionary<String,AnyObject>]
+                        array.append(dict)
+                    }else{
+                        var array:[Dictionary<String,AnyObject>] = []
+                        array.append(dict)
+                        retDict[keyName] = array
+                    }
+/*
                     for (itemKey,array) in retDict {
                         var flag = false
                         if itemKey == keyName {
@@ -56,6 +65,7 @@ class DataManager {
                             newDictArray.append(dict)
                         }
                     }
+*/
                 }
             }
         }

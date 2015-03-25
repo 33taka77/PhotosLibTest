@@ -36,7 +36,7 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
     }
 
     func sortButtonPushed(){
-        var sortResult:Dictionary<String,AnyObject> = self.dataMngr.searchOfKey("PixelWidth")
+        var sortResult:Dictionary<String,AnyObject> = self.dataMngr.searchOfKey("creationDate")
     }
 
     func collectAssets() {
@@ -45,12 +45,20 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
             let assets:PHFetchResult! = PHAsset.fetchAssetsInAssetCollection(object as PHAssetCollection, options: nil)
             assets.enumerateObjectsUsingBlock({ (asset, indexOfAsset, flag) -> Void in
                 self.assetsArray.append(asset as? PHAsset)
-                var exifInfo:Dictionary = self.getExifData(asset as PHAsset)
+                var exifInfo:Dictionary<String, AnyObject> = [:]
                 exifInfo["object"] = asset
+                exifInfo["creationDate"] = self.convertDatToString( (asset as PHAsset).creationDate as NSDate )
                 self.dataMngr.add(exifInfo as Dictionary<String, AnyObject>)
                 self.collectionView.reloadData()
             })
         }
+    }
+    
+    func convertDatToString(date:NSDate!)->String {
+        let formatta:NSDateFormatter = NSDateFormatter()
+        formatta.dateFormat = "yyyy/MM/dd"
+        let str:String = formatta.stringFromDate(date)
+        return str
     }
     
     func backButtonPushed() {
@@ -72,6 +80,10 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
        
         PHImageManager.defaultManager().requestImageForAsset(phAsset, targetSize: CGSizeMake(sizeX, sizeY), contentMode: PHImageContentMode.AspectFit, options: nil, resultHandler: { (image, info) -> Void in
             cell.thumbnailImageView.image = image
+            for (key, val) in info {
+                println("key:\(key) - value:(\(val)")
+                println("---------------------------")
+            }
             /*
             var exifInfo:Dictionary = self.getExifData(phAsset)
             exifInfo["object"] = phAsset
@@ -146,11 +158,13 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
             }
             return
         })
+        /*
         while true {
             if flag == true {
                 break
             }
         }
+*/
         return dict
     }
 }
